@@ -1,17 +1,11 @@
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { GpsdevicesModule } from './gpsdevices/gpsdevices.module';
-/* import { LoggerMiddleware } from './gpsdevices/middleware/logger.middleware';
-import { MongooseModule } from '@nestjs/mongoose'; */
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
     GpsdevicesModule,
-    // MongooseModule.forRoot('mongodb://localhost/nest'),
+    MongooseModule.forRoot('mongodb://localhost:27017'),
   ],
 })
-export class AppModule {} /* implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('gpsdevices');
-    //we have set up the LoggerMiddleware for the /gpsdevices route handlers that were previously defined inside the gpsdevices.controller
-  }
-} */
+export class AppModule {}

@@ -1,13 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { CreateGpsdeviceDto } from './dto/create-gpsdevice.dto';
-
-//@Injectable() attaches metadata,
-//which declares that GpsdevicesService is a class
+import { InjectModel } from '@nestjs/mongoose';
+import { Connection, Model } from 'mongoose';
+import { Gpsdevice, GpsdeviceDocument } from './schemas/gpddevice.schema';
 
 @Injectable()
 export class GpsdevicesService {
-  create(createGpsdeviceDto: CreateGpsdeviceDto) {
-    console.log(createGpsdeviceDto);
-    return createGpsdeviceDto;
+  constructor(
+    @InjectModel(Gpsdevice.name)
+    private GpsdeviceModel: Model<GpsdeviceDocument>,
+  ) {}
+
+  async create(createGpsdeviceDto: CreateGpsdeviceDto): Promise<Gpsdevice> {
+    //console.log(createGpsdeviceDto);
+    const createdGpsdevice = new this.GpsdeviceModel(createGpsdeviceDto);
+    console.log(createdGpsdevice);
+    return createdGpsdevice.save();
+  }
+  async findAll(): Promise<Gpsdevice[]> {
+    return this.GpsdeviceModel.find().exec();
   }
 }
