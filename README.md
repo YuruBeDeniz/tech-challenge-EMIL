@@ -1,73 +1,62 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Create a GPS device tracker app with NestJS, TypeScript and MongoDB.
 
-## Installation
+Before starting the project, I watched some TypeScript videos and read the TS documentation (www.typescriptlang.org) as I have never used TS before. 
 
-```bash
-$ npm install
-```
+I also learnt NestJS while developing the application. 
 
-## Running the app
+Now, I have a working backend app which can receive data from GPS devices and save it to the database.
 
-```bash
-# development
-$ npm run start
+Missing part: I could not set up containerization with Docker and authentication with gRPC. (But I am working on them to learn more about how they work)
 
-# watch mode
-$ npm run start:dev
+### 1. Set up the environment:
 
-# production mode
-$ npm run start:prod
-```
+After installing the first dependencies:
+- npm run start
 
-## Test
+#### tasks: 
+- learn TypeScript
+- learn NestJS 
 
-```bash
-# unit tests
-$ npm run test
+### 2. Create gpsdevices folder:
 
-# e2e tests
-$ npm run test:e2e
+#### tasks:
+create:
+ - GPS devices DTO
+ - GPS devices controller
+ - GPS devices provider (service)
+ - GPS devices module (to connect everything to app module and to main.ts respectively)
 
-# test coverage
-$ npm run test:cov
-```
+ ### 3. Create POST request:
 
-## Support
+ implement code to get data from GPS devices
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+ #### tasks:
+ - handle  POST request in gpsdevices controller and direct it to GPS devices service
+ - create GPS devices DTO in the service folder
 
-## Stay in touch
+ To see if the POST request is working:  $ curl -X POST http://localhost:3000/gpsdevices -d '{"id": "123", "latitude": "333", "longitude": "444"}' 
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+ ### 4. Create REST API
+ - install OPEN API and continue with swagger
 
-## License
+To see if the post request after installing OPEN API:  $ curl -X POST http://localhost:3000/gpsdevices -d '{"id": "123", "latitude": "333", "longitude": "444"}' -H "Content-Type: application/json"
 
-Nest is [MIT licensed](LICENSE).
+### 5. Connect to database
+
+#### tasks:
+- install MongoDB 
+- create GPS device schema and connect it to GPS device module
+- save the data to MongoDB through GPC device provider
+
+To see if the data is saved to DB:  $ curl -X POST http://localhost:3000/gpsdevices -d '{"id": "123", "latitude": "333", "longitude": "444"}' -H "Content-Type: application/json"
+
+### Find errors: 
+I could not start the app after installing MongoDB. The error was:
+"Cannot find module "src/schemas/gpsdevice.schema"
+Requrie stack:
+.../dist/..."
+
+After 2 hours of searching I realized the files stated in the error message was under dist folder. So I made "tsc" command to compile the TS code into JS. After that, it worked perfectly.
