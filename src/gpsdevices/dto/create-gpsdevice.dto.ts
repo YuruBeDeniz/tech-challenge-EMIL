@@ -2,9 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateGpsdeviceDto {
   @ApiProperty()
-  id: number;
-
-  @ApiProperty()
   brand?: string;
 
   @ApiProperty()

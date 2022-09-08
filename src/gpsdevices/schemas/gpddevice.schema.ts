@@ -6,9 +6,6 @@ export type GpsdeviceDocument = Gpsdevice & Document;
 @Schema()
 export class Gpsdevice {
   @Prop()
-  id: number;
-
-  @Prop()
   brand?: string;
 
   @Prop({ required: true })
