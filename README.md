@@ -1,11 +1,11 @@
-
 ## Description
 
-Create a GPS device tracker app with NestJS, TypeScript and MongoDB.
+Create a GPS device tracker app with NestJS, TypeScript and MongoDB. 
 
 Before starting the project, I watched some TypeScript videos and read the TS documentation (www.typescriptlang.org) as I have never used TS before. 
 
 I also learnt NestJS while developing the application. 
+
 
 Now, I have a working backend app which can receive data from GPS devices and save it to the database.
 
@@ -57,6 +57,8 @@ http://localhost:3000/api#/default/create
 - save the data to MongoDB through GPC device provider
 
 To see if the data is saved to DB:  $ curl -X POST http://localhost:3000/gpsdevices -d '{"id": "123", "latitude": "333", "longitude": "444"}' -H "Content-Type: application/json"
+
+
 
 ### Find errors: 
 I could not start the app after installing MongoDB. The error was:
