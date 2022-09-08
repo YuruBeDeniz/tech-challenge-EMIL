@@ -44,6 +44,11 @@ create:
 
 To see if the post request after installing OPEN API:  $ curl -X POST http://localhost:3000/gpsdevices -d '{"id": "123", "latitude": "333", "longitude": "444"}' -H "Content-Type: application/json"
 
+or to add data directly:
+
+npm run start
+http://localhost:3000/api#/default/create
+
 ### 5. Connect to database
 
 #### tasks:
